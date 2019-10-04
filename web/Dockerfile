@@ -1,11 +1,22 @@
 FROM php:7.2-apache
 RUN apt-get update && \
   apt-get install -y \
-  zlib1g-dev
+  zlib1g-dev \
+  less \
+  imagemagick
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql zip mbstring
+
+# wp-cli
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+# ssl
 COPY localhost.crt /etc/apache2/ssl/localhost.crt
 COPY localhost.key /etc/apache2/ssl/localhost.key
 COPY localhost.conf /etc/apache2/sites-enabled/localhost.conf
-RUN docker-php-ext-install mysqli pdo pdo_mysql zip mbstring
+
 RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN chown www-data:www-data /var/www/html/
