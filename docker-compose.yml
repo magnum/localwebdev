@@ -1,0 +1,35 @@
+version: "3.2"
+
+services:
+  apache:
+    build: 
+      context: ./web
+    depends_on:
+      - mysql
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${DOCROOT}:/var/www/html/:Z
+
+  mysql:
+    image: mysql:${MYSQL_VERSION:-latest}
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      #MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    #container_name: "${MYSQLDB_NAME}"
+
+networks:
+  backend:
+  frontend:
