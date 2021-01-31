@@ -2,6 +2,7 @@ version: "3.2"
 
 services:
   apache:
+    restart: "no"
     build: 
       context: ./web
     depends_on:
@@ -15,10 +16,12 @@ services:
     volumes:
       - ${DOCROOT}:/var/www/html/:Z
 
+  
+
   mysql:
-    image: mysql:${MYSQL_VERSION:-latest}
+    restart: "no"
+    image: mariadb:${MYSQL_VERSION:-latest}
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
     ports:
       - "3307:3306"
     volumes:

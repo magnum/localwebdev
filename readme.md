@@ -1,4 +1,4 @@
-
+https://medium.com/@nh3500/how-to-create-self-assigned-ssl-for-local-docker-based-lamp-dev-environment-on-macos-sierra-ab606a27ba8a
 
 # set local cert
 https://donatstudios.com/Self-Signed-Certificate-On-macOS-Apache
