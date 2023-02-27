@@ -2,7 +2,7 @@
 # local web dev env with apache and php
 
 ## set .env
-customize `.env` file setting `DOCROOT` variable pointing to your wanted web server's document root, ie. 
+customize `.env` file and set `DOCROOT` variable pointing to your wanted web server's document root, ie. 
 `/home/user/projects`
 
 ## run docker containers 
@@ -15,9 +15,9 @@ mysql externally available at port `3307` , modify `docker-composer.yml` for you
 
 https://medium.com/@nh3500/how-to-create-self-assigned-ssl-for-local-docker-based-lamp-dev-environment-on-macos-sierra-ab606a27ba8a
 
-## https support
+# https support
 
-## set local cert
+## set local cert
 https://donatstudios.com/Self-Signed-Certificate-On-macOS-Apache
 
 ```
