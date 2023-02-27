@@ -14,7 +14,12 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ${DOCROOT}:/var/www/html/:Z
+      - type: bind
+        source: ${DOCROOT}
+        target: /var/www/html/
+        consistency: cached
+      #- ${DOCROOT}:/var/www/html/:cached
+      #- localwebdev-docroot-sync:/var/www/html:nocopy # nocopy is important
 
   
 
@@ -25,13 +30,20 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+
+      - ./mysql/:/var/lib/mysql:delegated
     networks:
       - backend
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       #MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     #container_name: "${MYSQLDB_NAME}"
+
+volumes:
+  localwebdev-docroot-sync:
+    external: true
+  localwebdev-mysql-sync:
+    external: true
 
 networks:
   backend:

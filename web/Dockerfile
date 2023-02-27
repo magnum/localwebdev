@@ -1,11 +1,13 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 RUN apt-get update && \
   apt-get install -y \
   zlib1g-dev \
   less \
-  imagemagick
+  imagemagick \
+  libzip-dev \
+  nano
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql zip mbstring
+RUN docker-php-ext-install mysqli pdo pdo_mysql zip
 
 # wp-cli
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
