@@ -1,5 +1,3 @@
-version: "3.2"
-
 services:
   apache:
     restart: "no"
@@ -11,7 +9,7 @@ services:
       - backend
       - frontend
     ports:
-      - "80:80"
+      - "8888:80"
       - "443:443"
     volumes:
       - type: bind

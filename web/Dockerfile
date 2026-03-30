@@ -1,13 +1,20 @@
-FROM php:7.4-apache
+FROM php:8.2-apache
 RUN apt-get update && \
   apt-get install -y \
   zlib1g-dev \
   less \
   imagemagick \
   libzip-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev \
+  libwebp-dev \
   nano
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+  && docker-php-ext-install gd
 
 # wp-cli
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
